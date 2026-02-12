@@ -39,7 +39,7 @@ jobs:
           context: .
           file: Dockerfile
           push: true  
-          tags: ghcr.io/jamaltaffal/frontend:latest
+          tags: ghcr.io/JamalTaffal/jamal-frontend:latest
 
   deploy:
    runs-on: ubuntu-latest
@@ -59,6 +59,6 @@ jobs:
             
             echo '${{ secrets.JAMALTOKEN }}' | docker login ghcr.io -u ${{ github.actor }} --password-stdin
             
-            docker compose down frontend || true
+            docker compose down jamal-frontend || true
             
-            docker compose up -d frontend || true
+            docker compose up -d jamal-frontend || true
