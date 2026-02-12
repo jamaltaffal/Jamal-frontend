@@ -61,6 +61,6 @@ jobs:
             export VAULT_ROLE_ID=${{ secrets.VAULT_ROLE_ID }}
             export VAULT_SECRET_ID=${{ secrets.VAULT_SECRET_ID }}
 
-            ./vault-to-env.sh
+            ./vault-script.sh
             
            
