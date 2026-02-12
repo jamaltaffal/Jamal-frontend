@@ -57,8 +57,11 @@ jobs:
         script: |
             cd /root/JamalTaffal
             
-            echo '${{ secrets.JAMALTOKEN }}' | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+            chmod +x vault-to-env.sh
+
+            export VAULT_ROLE_ID=${{ secrets.VAULT_ROLE_ID }}
+            export VAULT_SECRET_ID=${{ secrets.VAULT_SECRET_ID }}
+
+            ./vault-to-env.sh
             
-            docker compose down jamal-frontend || true
-            
-            docker compose up -d jamal-frontend || true
+           
