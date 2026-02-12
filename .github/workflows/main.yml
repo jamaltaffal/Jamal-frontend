@@ -28,18 +28,17 @@ jobs:
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
         with:
-          registry: ghcr.io
-          username: jamaltaffal
-          password: ${{ secrets.JAMALTOKEN}}
-          
+            registry: ghcr.io
+            username: jamaltaffal
+            password: ${{ secrets.JAMALTOKEN }}
 
-      - name: Build Docker image   
+      - name: Build and push Docker image   
         uses: docker/build-push-action@v2
         with:
-          context: .
-          file: Dockerfile
-          push: true  
-          tags: ghcr.io/jamaltaffal:latest
+            context: .
+            file: Dockerfile
+            push: true  
+            tags: ghcr.io/jamaltaffal/Jamal-frontend:latest
 
   deploy:
    runs-on: ubuntu-latest
