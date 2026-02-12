@@ -55,9 +55,7 @@ jobs:
         key: ${{ secrets.JAMALSECRETS }}
         script: |
             cd /root/JamalTaffal
-            
-            chmod +x vault-to-env.sh
-
+           
             export VAULT_ROLE_ID=${{ secrets.VAULT_ROLE_ID }}
             export VAULT_SECRET_ID=${{ secrets.VAULT_SECRET_ID }}
 
