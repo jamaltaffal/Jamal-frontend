@@ -24,4 +24,4 @@ jobs:
 
       - name: Deploy Frontend
         run: |
-          kubectl apply -f frontend/d
+          kubectl apply -f frontend/
