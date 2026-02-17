@@ -39,6 +39,8 @@ jobs:
             file: Dockerfile
             push: true  
             tags: ghcr.io/jamaltaffal/jamal-frontend:latest
+            build-args: |
+             REACT_APP_API_URL=/api
 
   deploy:
    runs-on: ubuntu-latest
