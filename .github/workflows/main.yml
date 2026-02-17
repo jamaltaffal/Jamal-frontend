@@ -40,7 +40,7 @@ jobs:
             push: true  
             tags: ghcr.io/jamaltaffal/jamal-frontend:latest
             build-args: |
-             REACT_APP_API_URL=/
+             REACT_APP_API_URL=https://devops-1.sociumtech.com/
 
   deploy:
    runs-on: ubuntu-latest
