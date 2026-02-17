@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://37.27.31.43:4000';
+const API_URL = process.env.REACT_APP_API_URL || 'https://devops-1.sociumtech.com';
 
 function App() {
   const [tasks, setTasks] = useState([]);
