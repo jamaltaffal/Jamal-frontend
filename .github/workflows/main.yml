@@ -24,5 +24,4 @@ jobs:
 
       - name: Deploy Frontend
         run: |
-          cd jamal-k8s/
           kubectl apply -f frontend/d
