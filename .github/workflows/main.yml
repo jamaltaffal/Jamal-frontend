@@ -25,5 +25,6 @@ jobs:
       - name: Deploy Frontend
         run: |
           export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+          cd jamal-k8s/
           kubectl apply -f frontend/jamal-deployment.yaml
           kubectl apply -f frontend/jamal-service.yaml
