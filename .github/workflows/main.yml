@@ -19,11 +19,9 @@ jobs:
 
       - name: Configure kubeconfig
         run: |
-          echo "${{ secrets.KUBECONFIG_CONTENT }}" > kubeconfig
-          export KUBECONFIG=$PWD/kubeconfig
-
-      - name: Deploy Frontend
-        run: |
           export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
-          kubectl apply -f home/jamal-k8s/frontend/jamal-deployment.yaml
-          kubectl apply -f home/jamal-k8s/frontend/jamal-service.yaml
+
+      - name: Rollout Restart Frontend
+        run: |
+          kubectl rollout restart deployment/frontend -n jamal
+          kubectl rollout status deployment/frontend -n jamal
