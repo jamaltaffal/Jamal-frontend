@@ -22,13 +22,8 @@ jobs:
           echo "${{ secrets.KUBECONFIG_CONTENT }}" > kubeconfig
           export KUBECONFIG=$PWD/kubeconfig
 
-      - name: Show repo structure
-        run: |
-          pwd
-          ls -R
-
       - name: Deploy Frontend
         run: |
           export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
-          kubectl apply -f frontend/jamal-deployment.yaml
-          kubectl apply -f frontend/jamal-service.yaml
+          kubectl apply -f home/jamal-k8s/frontend/jamal-deployment.yaml
+          kubectl apply -f home/jamal-k8s/frontend/jamal-service.yaml
