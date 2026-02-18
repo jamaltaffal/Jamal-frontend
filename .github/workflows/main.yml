@@ -1,28 +1,61 @@
-name: Rollout Frontend
+name: Deploy to frontend 
 
 on:
-  push:
+ push:
     branches:
       - main
-
 jobs:
+  build:
+    runs-on: self-hosted
+    environment: frontend
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Cache Docker layers
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.JAMALTOKEN}}
+          
+
+      - name: Build Docker image   
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: Dockerfile
+          push: true  
+          tags: ghcr.io/jamaltaffal/jamal-frontend:latest
+
   deploy:
     runs-on: self-hosted
     steps:
-      - name: Checkout Repo
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up kubectl
-        uses: azure/setup-kubectl@v3
-        with:
-          version: 'v1.28.0'
-
-      - name: Set K3s kubeconfig
+      - name: Set KUBECONFIG
         run: |
           export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
           kubectl config view
 
       - name: Rollout Restart Frontend
         run: |
-          kubectl rollout restart deployment/frontend -n jamal
-          kubectl rollout status deployment/frontend -n jamal
+          kubectl rollout restart frontend/ -n jamal
+
+      - name: Rollout Restart Backend
+        run: |
+          kubectl rollout restart backend/ -n jamal
