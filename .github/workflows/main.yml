@@ -55,8 +55,8 @@ jobs:
 
       - name: Rollout Restart Frontend
         run: |
-          kubectl rollout restart frontend/ -n jamal
+         kubectl rollout restart deployment/frontend -n jamal
 
       - name: Rollout Restart Backend
         run: |
-          kubectl rollout restart backend/ -n jamal
+         kubectl rollout restart deployment/backend -n jamal
